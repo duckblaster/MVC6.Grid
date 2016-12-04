@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Html;
 using System;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace NonFactors.Mvc.Grid
 {
@@ -13,6 +14,8 @@ namespace NonFactors.Mvc.Grid
         IHtmlContent Title { get; set; }
 
         IHtmlContent ValueFor(IGridRow<Object> row);
+
+        Task<IHtmlContent> ValueForAsync(IGridRow<Object> row);
     }
 
     public interface IGridColumn<T> : IFilterableColumn<T>, ISortableColumn<T>, IGridColumn

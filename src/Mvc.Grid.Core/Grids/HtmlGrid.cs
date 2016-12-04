@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.IO;
 using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace NonFactors.Mvc.Grid
 {
@@ -110,6 +112,11 @@ namespace NonFactors.Mvc.Grid
         public void WriteTo(TextWriter writer, HtmlEncoder encoder)
         {
             Html.Partial(PartialViewName, Grid).WriteTo(writer, encoder);
+        }
+
+        public Task<IHtmlContent> AsAsync()
+        {
+            return Html.PartialAsync(PartialViewName, Grid);
         }
     }
 }

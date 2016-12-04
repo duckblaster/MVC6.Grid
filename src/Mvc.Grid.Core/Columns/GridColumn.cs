@@ -8,6 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace NonFactors.Mvc.Grid
 {
@@ -93,6 +94,17 @@ namespace NonFactors.Mvc.Grid
             Object value = GetValueFor(row);
             if (value == null) return HtmlString.Empty;
             if (value is IHtmlContent) return value as IHtmlContent;
+            if (Format != null) value = String.Format(Format, value);
+            if (IsEncoded) return new HtmlString(HtmlEncoder.Default.Encode(value.ToString()));
+
+            return new HtmlString(value.ToString());
+        }
+        public override async Task<IHtmlContent> ValueForAsync(IGridRow<Object> row)
+        {
+            Object value = GetValueFor(row);
+            if (value == null) return HtmlString.Empty;
+            if (value is IHtmlContent) return value as IHtmlContent;
+            if (value is Task<IHtmlContent>) return await (value as Task<IHtmlContent>);
             if (Format != null) value = String.Format(Format, value);
             if (IsEncoded) return new HtmlString(HtmlEncoder.Default.Encode(value.ToString()));
 

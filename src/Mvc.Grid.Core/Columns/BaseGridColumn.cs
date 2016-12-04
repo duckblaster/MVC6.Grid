@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace NonFactors.Mvc.Grid
 {
@@ -109,5 +110,7 @@ namespace NonFactors.Mvc.Grid
 
         public abstract IQueryable<T> Process(IQueryable<T> items);
         public abstract IHtmlContent ValueFor(IGridRow<Object> row);
+
+        public abstract Task<IHtmlContent> ValueForAsync(IGridRow<object> row);
     }
 }

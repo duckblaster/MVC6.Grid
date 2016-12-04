@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Html;
 using System;
+using System.Threading.Tasks;
 
 namespace NonFactors.Mvc.Grid
 {
@@ -25,5 +26,7 @@ namespace NonFactors.Mvc.Grid
 
         IHtmlGrid<T> Pageable(Action<IGridPager<T>> builder);
         IHtmlGrid<T> Pageable();
+
+        Task<IHtmlContent> AsAsync();
     }
 }

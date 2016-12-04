@@ -49,7 +49,7 @@
                     <tr class="@row.CssClasses">
                         @foreach (IGridColumn column in Model.Columns)
                         {
-                            <td class="@column.CssClasses">@column.ValueFor(row)</td>
+                            <td class="@column.CssClasses">@await column.ValueForAsync(row)</td>
                         }
                     </tr>
                 }
@@ -66,6 +66,6 @@
     </table>
     @if (Model.Pager != null)
     {
-        @Html.Partial(Model.Pager.PartialViewName, Model.Pager)
+        @await Html.PartialAsync(Model.Pager.PartialViewName, Model.Pager)
     }
 </div>
