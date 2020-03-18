@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace NonFactors.Mvc.Grid
         IGridRows<Object> Rows { get; }
 
         IGridPager Pager { get; }
+        ModelExpressionProvider ModelExpressionProvider { get; }
     }
 
     public interface IGrid<T> : IGrid

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
 using System;
@@ -73,7 +73,7 @@ namespace NonFactors.Mvc.Grid
             ProcessorType = GridProcessorType.Pre;
             ExpressionValue = expression.Compile();
             IsSortable = IsFilterable = IsMember(expression);
-            Name = ExpressionHelper.GetExpressionText(expression);
+            Name = grid.ModelExpressionProvider.GetExpressionText(expression);
         }
 
         public override IQueryable<T> Process(IQueryable<T> items)

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,11 @@ namespace NonFactors.Mvc.Grid
     {
         public static HtmlGrid<T> Grid<T>(this IHtmlHelper html, IEnumerable<T> source) where T : class
         {
-            return new HtmlGrid<T>(html, new Grid<T>(source));
+            return new HtmlGrid<T>(html, new Grid<T>(source, html.ViewContext.HttpContext.RequestServices.GetRequiredService<ModelExpressionProvider>()));
         }
         public static HtmlGrid<T> Grid<T>(this IHtmlHelper html, String partialViewName, IEnumerable<T> source) where T : class
         {
-            return new HtmlGrid<T>(html, new Grid<T>(source)) { PartialViewName = partialViewName };
+            return new HtmlGrid<T>(html, new Grid<T>(source, html.ViewContext.HttpContext.RequestServices.GetRequiredService<ModelExpressionProvider>())) { PartialViewName = partialViewName };
         }
 
         public static IHtmlContent AjaxGrid(this IHtmlHelper html, String dataSource)

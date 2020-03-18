@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +23,12 @@ namespace NonFactors.Mvc.Grid
 
         IGridRows<Object> IGrid.Rows => Rows;
         public IGridRowsOf<T> Rows { get; set; }
+        public ModelExpressionProvider ModelExpressionProvider { get; private set; }
 
         IGridPager IGrid.Pager => Pager;
         public IGridPager<T> Pager { get; set; }
 
-        public Grid(IEnumerable<T> source)
+        public Grid(IEnumerable<T> source, ModelExpressionProvider modelExpressionProvider)
         {
             Processors = new List<IGridProcessor<T>>();
             Source = source.AsQueryable();
@@ -35,6 +37,7 @@ namespace NonFactors.Mvc.Grid
 
             Columns = new GridColumns<T>(this);
             Rows = new GridRows<T>(this);
+            ModelExpressionProvider = modelExpressionProvider;
         }
     }
 }
