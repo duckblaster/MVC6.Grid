@@ -9,7 +9,7 @@ namespace NonFactors.Mvc.Grid
         public override Expression Apply(Expression expression)
         {
             MethodInfo toUpperMethod = typeof(String).GetMethod("ToUpper", new Type[0]);
-            MethodInfo containsMethod = typeof(String).GetMethod("Contains");
+            MethodInfo containsMethod = typeof(String).GetMethod("Contains", new Type[] { typeof(String) });
             Expression value = Expression.Constant(Value.ToUpper());
 
             Expression notNull = Expression.NotEqual(expression, Expression.Constant(null));
