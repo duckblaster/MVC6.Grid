@@ -10,23 +10,16 @@ namespace NonFactors.Mvc.Grid
             Object value = GetNumericValue();
             if (value == null) return null;
 
-            switch (Type)
+            return Type switch
             {
-                case "Equals":
-                    return Expression.Equal(expression, Expression.Constant(value, expression.Type));
-                case "NotEquals":
-                    return Expression.NotEqual(expression, Expression.Constant(value, expression.Type));
-                case "LessThan":
-                    return Expression.LessThan(expression, Expression.Constant(value, expression.Type));
-                case "GreaterThan":
-                    return Expression.GreaterThan(expression, Expression.Constant(value, expression.Type));
-                case "LessThanOrEqual":
-                    return Expression.LessThanOrEqual(expression, Expression.Constant(value, expression.Type));
-                case "GreaterThanOrEqual":
-                    return Expression.GreaterThanOrEqual(expression, Expression.Constant(value, expression.Type));
-                default:
-                    return null;
-            }
+                "Equals" => Expression.Equal(expression, Expression.Constant(value, expression.Type)),
+                "NotEquals" => Expression.NotEqual(expression, Expression.Constant(value, expression.Type)),
+                "LessThan" => Expression.LessThan(expression, Expression.Constant(value, expression.Type)),
+                "GreaterThan" => Expression.GreaterThan(expression, Expression.Constant(value, expression.Type)),
+                "LessThanOrEqual" => Expression.LessThanOrEqual(expression, Expression.Constant(value, expression.Type)),
+                "GreaterThanOrEqual" => Expression.GreaterThanOrEqual(expression, Expression.Constant(value, expression.Type)),
+                _ => null,
+            };
         }
 
         public abstract Object GetNumericValue();

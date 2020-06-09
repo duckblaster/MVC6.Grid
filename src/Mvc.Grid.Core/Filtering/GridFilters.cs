@@ -120,11 +120,13 @@ namespace NonFactors.Mvc.Grid
                     key != column.Grid.Name + "-" + column.Name + "-Op")
                 .ToArray();
 
-            GridColumnFilter<T> filter = new GridColumnFilter<T>();
-            filter.Second = GetSecondFilter(column, keys);
-            filter.First = GetFirstFilter(column, keys);
-            filter.Operator = GetOperator(column);
-            filter.Column = column;
+            GridColumnFilter<T> filter = new GridColumnFilter<T>
+            {
+                Second = GetSecondFilter(column, keys),
+                First = GetFirstFilter(column, keys),
+                Operator = GetOperator(column),
+                Column = column
+            };
 
             return filter;
         }
