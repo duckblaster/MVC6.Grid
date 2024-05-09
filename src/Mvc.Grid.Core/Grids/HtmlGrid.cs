@@ -109,11 +109,6 @@ namespace NonFactors.Mvc.Grid
             return Pageable(builder => { });
         }
 
-        public void WriteTo(TextWriter writer, HtmlEncoder encoder)
-        {
-            Html.Partial(PartialViewName, Grid).WriteTo(writer, encoder);
-        }
-
         public Task<IHtmlContent> AsAsync()
         {
             return Html.PartialAsync(PartialViewName, Grid);

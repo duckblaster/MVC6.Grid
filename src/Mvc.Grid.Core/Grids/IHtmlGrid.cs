@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace NonFactors.Mvc.Grid
 {
-    public interface IHtmlGrid<T> : IHtmlContent
+    public interface IHtmlGrid<T>
     {
         IGrid<T> Grid { get; }
         String PartialViewName { get; set; }

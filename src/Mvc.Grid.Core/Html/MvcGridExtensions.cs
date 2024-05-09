@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace NonFactors.Mvc.Grid
 {
@@ -18,9 +19,9 @@ namespace NonFactors.Mvc.Grid
             return new HtmlGrid<T>(html, new Grid<T>(source, html.ViewContext.HttpContext.RequestServices.GetRequiredService<ModelExpressionProvider>())) { PartialViewName = partialViewName };
         }
 
-        public static IHtmlContent AjaxGrid(this IHtmlHelper html, String dataSource)
+        public static Task<IHtmlContent> AjaxGrid(this IHtmlHelper html, String dataSource)
         {
-            return html.Partial("MvcGrid/_AjaxGrid", dataSource);
+            return html.PartialAsync("MvcGrid/_AjaxGrid", dataSource);
         }
 
         public static IServiceCollection AddMvcGrid(this IServiceCollection services)
